@@ -1,0 +1,259 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => bundle 插件管理和配置项
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.myconfig/vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => 选择插件
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let s:plugin_list =[
+'a.vim',
+'vim-easymotion',
+'ack.vim',
+'vim-powerline',
+'ultisnips',
+'nerdtree',
+'tagbar',
+'nerdcommenter',
+'vim-multiple-cursors',
+'syntastic',
+"'YouCompleteMe',
+'vim-fugitive',
+'vim-surround',
+'auto-pairs',
+]
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => 使用Vundle来管理插件
+" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => a.vim 快速切换.h和.c文件
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'a.vim')
+    Plugin 'a.vim'
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-easymotion 高效移动
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'vim-easymotion')
+    Plugin 'Lokaltog/vim-easymotion'
+    map <Leader> <Plug>(easymotion-prefix)
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ack.vim 文件搜索
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'ack.vim')
+    Plugin 'ack.vim'
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-powerline 状态栏增强展示
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'vim-powerline')
+    Plugin 'Lokaltog/vim-powerline'
+    set t_Co=256       " Explicitly tell Vim that the terminal supports 256 colors
+    set encoding=utf-8 " Necessary to show Unicode glyphs
+    " set guifont=PowerlineSymbols\ for\ Powerline
+    let g:Powerline_symbols = 'fancy'
+endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ultisnips 代码片段快速插入
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'ultisnips')
+    Plugin 'SirVer/ultisnips'
+    " 代码片段资源,需要学习
+    " Snippets are separated from the engine. Add this if you want them:
+    Plugin 'honza/vim-snippets'
+    " let g:UltiSnipsExpandTrigger = "<tab>"
+    " let g:UltiSnipsJumpForwardTrigger = "<tab>"
+    " 定义存放代码片段的文件夹 .vim/additional_snippets下，使用自定义和默认的，将会的到全局，有冲突的会提示
+    let g:UltiSnipsExpandTrigger="<C-j>"
+    nmap ult :silent! :UltiSnipsEdit<CR>
+    let g:UltiSnipsSnippetDirectories=["additional_snippets", 'UltiSnips']
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => nerdtree 目录导航
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'nerdtree')
+    Plugin 'scrooloose/nerdtree'
+    nmap <leader>nt :NERDTreeToggle<CR>
+    let NERDTreeHighlightCursorline=1
+    let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
+    "let NERDTreeDirArrows=0
+    "let g:netrw_home='~/bak'
+    "close vim if the only window left open is a NERDTree
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => tagbar 标签导航
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'tagbar')
+    Plugin 'majutsushi/tagbar'
+    nmap <leader>tb :TagbarToggle<CR>
+    let g:tagbar_autofocus = 1
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => nerdcommenter 快速注释
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'nerdcommenter')
+    Plugin 'scrooloose/nerdcommenter'
+    " map cc <leader>c<space>
+    let NERDShutUp=1
+    let NERDSpaceDelims=1     " 让注释符与语句之间留一个空格
+    let NERDCompactSexyComs=1 " 多行注释时样子更好看
+    let NERD_c_alt_style=1
+    let NERD_cpp_alt_style=1
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-multiple-cursors 多光标选中编辑
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'vim-multiple-cursors')
+    Plugin 'terryma/vim-multiple-cursors'
+    let g:multi_cursor_use_default_mapping=0
+    " Default mapping
+    let g:multi_cursor_next_key='<C-n>'
+    let g:multi_cursor_prev_key='<C-p>'
+    let g:multi_cursor_skip_key='<C-x>'
+    let g:multi_cursor_quit_key='<Esc>'
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => syntastic  多语言语法检查
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'syntastic')
+    Plugin 'scrooloose/syntastic'
+    let g:syntastic_error_symbol='>>'
+    let g:syntastic_warning_symbol='>'
+    let g:syntastic_check_on_open=1
+    let g:syntastic_enable_highlighting = 0
+    "let g:syntastic_python_checker="flake8,pyflakes,pep8,pylint"
+    let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快
+    let g:syntastic_javascript_checkers = ['jsl', 'jshint']
+    let g:syntastic_html_checkers=['tidy', 'jshint']
+    highlight SyntasticErrorSign guifg=white guibg=black
+endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => YouCompleteMe  代码自动补全
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'YouCompleteMe')
+    Plugin 'Valloric/YouCompleteMe'
+    " youcompleteme  默认tab  s-tab 和自动补全冲突
+    " let g:ycm_key_list_select_completion=['<c-n>']
+    " let g:ycm_key_list_select_completion = ['<Down>']
+    " let g:ycm_key_list_previous_completion=['<c-p>']
+    " let g:ycm_key_list_previous_completion = ['<Up>']
+    let g:ycm_confirm_extra_conf=0      " 关闭加载.ycm_extra_conf.py提示
+    let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
+    let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
+    let g:ycm_collect_identifiers_from_tags_files=1                 " 开启 YCM 基于标签引擎
+    let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
+    let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    let g:ycm_min_num_of_chars_for_completion=2                     " 从第2个键入字符就开始罗列匹配项
+    let g:syntastic_always_populate_loc_list=1
+    " 引入，可以补全系统，以及python的第三方包 针对新老版本YCM做了兼容
+    " old version
+    if !empty(glob("~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"))
+        let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
+    endif
+    " new version
+    if !empty(glob("~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
+        let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+    endif
+
+    "mapping
+    nmap <leader>gd :YcmDiags<CR>
+    nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>           " 跳转到申明处
+    nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>            " 跳转到定义处
+    nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+    " 直接触发自动补全
+    let g:ycm_key_invoke_completion = '<C-Space>'
+    " 黑名单,不启用
+    let g:ycm_filetype_blacklist = {
+          \ 'tagbar' : 1,
+          \ 'gitcommit' : 1,
+          \}
+endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-fugitive Git外包插件
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'vim-fugitive')
+    Plugin 'tpope/vim-fugitive'
+    " :Gdiff  :Gstatus :Gvsplit
+    " nnoremap <leader>ge :Gdiff<CR>
+endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-surround 针对括号的操作
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'vim-surround')
+    Plugin 'tpope/vim-surround'
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => auto_pairs 括号的补全
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'auto_pairs')
+    Plugin 'jiangmiao/auto-pairs'
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => end
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Put your non-Plugin stuff after this line

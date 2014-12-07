@@ -1,0 +1,19 @@
+#跳转
+alias ..='cd ..'
+alias cd..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias sx='cd ~/KuaiPan/实习相关/'
+
+alias cds='echo "`pwd`" > /tmp/cdsave'  #cd save : save where i am
+alias cdb='cd "`cat /tmp/cdsave`"'  # cd back
+
+
+#添加默认选项
+alias vmstat='vmstat -w'
+alias mkdir='mkdir -pv'
+alias cp='cp -v'
+alias cpr='cp -r'
+alias mv='mv -v'
+alias df='df -h'
+alias du='du -h'
