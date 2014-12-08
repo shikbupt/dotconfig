@@ -2,7 +2,8 @@
 	name = shikbupt
 	email = shikbupt@gmail.com
 [push]
-	default = simple
+#	default = simple
+    default = matching
 [core]
     editor = vim
     pager = less -R

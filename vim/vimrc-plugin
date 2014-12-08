@@ -17,24 +17,23 @@ Plugin 'gmarik/Vundle.vim'
 " => 选择插件
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let s:plugin_list =[
-'a.vim',
-'vim-easymotion',
-'ack.vim',
-'vim-powerline',
-'ultisnips',
-'nerdtree',
-'tagbar',
-'nerdcommenter',
-'vim-multiple-cursors',
-'syntastic',
-"'YouCompleteMe',
-'vim-fugitive',
-'vim-surround',
-'auto-pairs',
-]
+let s:plugin_list =[  
+            \'a.vim', 
+            \'vim-easymotion',
+            \'ack.vim',
+            \'vim-powerline',
+            \'ultisnips',
+            \'nerdtree',
+            \'tagbar',
+            \'nerdcommenter',
+            \'vim-multiple-cursors',
+            \'syntastic',
+            \'vim-fugitive',
+            \'vim-surround',
+            \'auto-pairs'
+            \]
 
-
+"            \'YouCompleteMe',
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => 使用Vundle来管理插件
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -242,7 +241,7 @@ endif
 " => auto_pairs 括号的补全
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-if count(s:plugin_list, 'auto_pairs')
+if count(s:plugin_list, 'auto-pairs')
     Plugin 'jiangmiao/auto-pairs'
 endif
 
