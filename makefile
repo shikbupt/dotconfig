@@ -9,6 +9,7 @@ all :
 
 .PHONY: git
 git : 
+	grep -ril root_to_install ./git/* | xargs sed -i "s,ROOT_TO_INSTALL,`pwd`,g"
 	if [ -e ~/.gitconfig ]; then   \
 		mv ~/.gitconfig ~/.gitconfig.old;  \
 	fi
@@ -16,6 +17,7 @@ git :
 
 .PHONY: vim
 vim : 
+	grep -ril root_to_install ./vim/* | xargs sed -i "s,ROOT_TO_INSTALL,`pwd`,g"
 	if [ -e ~/.vimrc ]; then  \
 		mv ~/.vimrc ~/.vimrc.old;  \
 	fi
@@ -30,10 +32,13 @@ vim :
 
 .PHONY: system
 system :
+	grep -ril root_to_install ./system/* | xargs sed -i "s,ROOT_TO_INSTALL,`pwd`,g"
 	if [ -e ~/.bashrc ]; then  \
-		mv ~/.bashrc ~/.bashrc.old;  \
+		echo "source ${PWD}/system/bashrc" >> ~/.bashrc; \
+	else\
+		ln -s ${PWD}/system/bashrc ~/.bashrc;  \
 	fi
-	ln -s ${PWD}/system/bashrc ~/.bashrc
+
 
 
 

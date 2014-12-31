@@ -426,4 +426,4 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-source ~/.myconfig/vim/vimrc-plugin
+source ROOT_TO_INSTALL/vim/vimrc-plugin

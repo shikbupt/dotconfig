@@ -17,3 +17,10 @@ alias cpr='cp -r'
 alias mv='mv -v'
 alias df='df -h'
 alias du='du -h'
+
+
+
+#for work
+alias didivpn='cd ~/Documents; sudo openvpn --config deshi.ovpn'
+alias kaifa='ssh root@10.10.8.127'
+alias wanliu='ssh root@10.10.8.122'
