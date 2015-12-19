@@ -17,7 +17,9 @@ git :
 
 .PHONY: vim
 vim : 
-	-grep -ril root_to_install ./vim/* | xargs sed -i "s,ROOT_TO_INSTALL,`pwd`,g"
+	sed -i "s,set rtp+=.*$,set rtp+=`pwd`/vim/bundle/Vundle.vim,g" ./vim/vimrc-plugin
+	sed -i "s,call vundle#begin.*$,call vundle#begin('`pwd`/vim/bundle'),g" ./vim/vimrc-plugin
+	sed -i "\$s,.*,source `pwd`/vim/vimrc-plugin,g" ./vim/vimrc
 	if [ -e ~/.vimrc ]; then  \
 		mv ~/.vimrc ~/.vimrc.old;  \
 	fi
