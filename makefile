@@ -3,23 +3,14 @@
 PWD=`pwd`
 
 all : 
-	make git
 	make vim
 	make system
 
-.PHONY: git
-git : 
-	-grep -ril root_to_install ./git/* | xargs sed -i "s,ROOT_TO_INSTALL,`pwd`,g"
-	if [ -e ~/.gitconfig ]; then   \
-		mv ~/.gitconfig ~/.gitconfig.old;  \
-	fi
-	ln -s ${PWD}/git/gitconfig ~/.gitconfig
-
 .PHONY: vim
 vim : 
-	sed -i "s,set rtp+=.*$,set rtp+=`pwd`/vim/bundle/Vundle.vim,g" ./vim/vimrc-plugin
-	sed -i "s,call vundle#begin.*$,call vundle#begin('`pwd`/vim/bundle'),g" ./vim/vimrc-plugin
-	sed -i "\$s,.*,source `pwd`/vim/vimrc-plugin,g" ./vim/vimrc
+	sed -i -e "s,set rtp+=.*$,set rtp+=`pwd`/vim/bundle/Vundle.vim,g" ./vim/vimrc-plugin
+	sed -i -e "s,call vundle#begin.*$,call vundle#begin('`pwd`/vim/bundle'),g" ./vim/vimrc-plugin
+	sed -i -e "\$s,.*,source `pwd`/vim/vimrc-plugin,g" ./vim/vimrc
 	if [ -e ~/.vimrc ]; then  \
 		mv ~/.vimrc ~/.vimrc.old;  \
 	fi
