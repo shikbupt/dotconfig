@@ -34,12 +34,7 @@ vim :
 
 .PHONY: system
 system :
-	-grep -ril root_to_install ./system/* | xargs sed -i "s,ROOT_TO_INSTALL,`pwd`,g"
-	if [ -e ~/.bashrc ]; then  \
-		echo "source ${PWD}/system/bashrc" >> ~/.bashrc; \
-	else\
-		ln -s ${PWD}/system/bashrc ~/.bashrc;  \
-	fi
+	sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"	
 
 
 
