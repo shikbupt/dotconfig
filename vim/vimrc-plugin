@@ -30,8 +30,13 @@ let s:plugin_list =[
             \'syntastic',
             \'vim-fugitive',
             \'vim-surround',
-            \'auto-pairs'
+            \'auto-pairs',
+            \'YouCompleteMe',
+            \'YCM-Generator',
+            \'gundo',
+            \'easy-align',
             \]
+            "\'color_coded',
 
 "            \'YouCompleteMe',
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -208,8 +213,13 @@ if count(s:plugin_list, 'YouCompleteMe')
     nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>            " 跳转到定义处
     nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+    let g:ycm_error_symbol = '>>'
+    let g:ycm_warning_symbol = '>'
+    let g:ycm_autoclose_preview_window_after_completion = 1
+    let g:ycm_autoclose_preview_window_after_insertion = 1
+
     " 直接触发自动补全
-    let g:ycm_key_invoke_completion = '<C-Space>'
+    let g:ycm_key_invoke_completion = '<C-c>'
     " 黑名单,不启用
     let g:ycm_filetype_blacklist = {
           \ 'tagbar' : 1,
@@ -243,6 +253,44 @@ endif
 
 if count(s:plugin_list, 'auto-pairs')
     Plugin 'jiangmiao/auto-pairs'
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>YCM-Generator 生成 .ycm_extra_conf.py
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'YCM-Generator')
+    Plugin 'rdnetto/YCM-Generator'
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>color_coded c-family 代码颜色
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'color_coded')
+    Plugin 'jeaye/color_coded'
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>gundo  文件修改 tree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'gundo')
+    Plugin 'sjl/gundo.vim'
+    nnoremap <F5> :GundoToggle<CR>
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => 区块对齐
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if count(s:plugin_list, 'easy-align')
+    Plugin 'junegunn/vim-easy-align'
+    " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+    vmap <Enter> <Plug>(EasyAlign)
+    
+    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+    nmap ga <Plug>(EasyAlign)"
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
